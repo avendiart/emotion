@@ -1,7 +1,7 @@
 // Definitions by: Junyoung Clare Jang <https://github.com/Ailrun>
 // TypeScript Version: 3.2
 
-import { Theme } from '@emotion/react'
+import { Theme as EmotionTheme } from '@emotion/react'
 import { CreateStyled as BaseCreateStyled, CreateStyledComponent } from './base'
 
 export {
@@ -15,7 +15,7 @@ export {
   CreateStyledComponent
 } from './base'
 
-export type StyledTags = {
+export type StyledTags<Theme = EmotionTheme> = {
   [Tag in keyof JSX.IntrinsicElements]: CreateStyledComponent<
     {
       theme?: Theme
@@ -25,7 +25,9 @@ export type StyledTags = {
   >
 }
 
-export interface CreateStyled extends BaseCreateStyled, StyledTags {}
+export interface CreateStyled<Theme = EmotionTheme>
+  extends BaseCreateStyled<Theme>,
+    StyledTags<Theme> {}
 
 declare const styled: CreateStyled
 export default styled

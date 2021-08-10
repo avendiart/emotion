@@ -3,7 +3,7 @@
 
 import * as React from 'react'
 import { ComponentSelector, Interpolation } from '@emotion/serialize'
-import { PropsOf, DistributiveOmit, Theme } from '@emotion/react'
+import { PropsOf, Theme as EmotionTheme } from '@emotion/react'
 
 export {
   ArrayInterpolation,
@@ -61,7 +61,8 @@ export interface StyledComponent<
 export interface CreateStyledComponent<
   ComponentProps extends {},
   SpecificComponentProps extends {} = {},
-  JSXProps extends {} = {}
+  JSXProps extends {} = {},
+  Theme = EmotionTheme
 > {
   /**
    * @typeparam AdditionalProps  Additional props to add to your styled component
@@ -115,7 +116,7 @@ export interface CreateStyledComponent<
  * @example styled('div')({ width: 100 })
  * @example styled('div')<Props>(props => ({ width: props.width })
  */
-export interface CreateStyled {
+export interface CreateStyled<Theme = EmotionTheme> {
   <
     C extends React.ComponentClass<React.ComponentProps<C>>,
     ForwardedProps extends keyof React.ComponentProps<C> = keyof React.ComponentProps<C>
